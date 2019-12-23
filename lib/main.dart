@@ -17,33 +17,33 @@ class MyApp extends StatefulWidget {
   
 }
 class _MyAppState extends State{
-  @override
-  Widget build(BuildContext context) {
-    final _questions = [
+  final questions = [
       {'questionText': "Whats your favorite colour?", 'answers': ["Black", "Red", "Green"]},
       {'questionText': "Whats your favorite animal?", 'answers': ["Cat", "Dog", "Cow"]},
       {'questionText': "Whats your favorite food?", 'answers': ["Pizza", "Burger", "Sandwich"]}   
     ];
-    
+  @override
+  Widget build(BuildContext context) {
     return MaterialApp(home: Scaffold(
        appBar: AppBar(title: Text("My First App"),),
-       body: Column(children: <Widget>
-       [Question(_questions[_counter]['questionText']),
-      ...(_questions[_counter]['answers'] as List<String>).map((answer) {
+       body: _counter < questions.length ? Column(children: <Widget>
+       [Question(questions[_counter]['questionText']),
+      ...(questions[_counter]['answers'] as List<String>).map((answer) {
         return Answer(_answerQuestions, answer);
       }).toList()
       ])
-       
+       : Center(child: Text("Final result"))
     ));
   }
 
   void _answerQuestions(){
     setState(() {
-      if(_counter< 2){
-        _counter++;
-      }else{
-        _counter--;
-      }
+      // if(_counter < questions.length - 1){
+      //   _counter++;
+      // }else{
+      //   _counter--;
+      // }
+      _counter++;
     });
     
     print(_counter); 
